@@ -1,10 +1,8 @@
-# Will They Survive - BFS Simulation
-
-Program ini mensimulasikan permainan sederhana berbasis grid. Setiap warga (`W`) mencari jalur terpendek menuju titik aman (`S`) menggunakan BFS (Breadth-First Search), lalu simulasi berjalan per detik sambil api (`F`) menyebar dan membakar sel di sekitarnya.
+# Will They Survive - How to Run
 
 ## Requirement
 
-Program ditulis dalam C dan memakai `windows.h`, sehingga paling langsung dijalankan di Windows.
+Program ditulis dalam C dan memakai `windows.h`
 
 Pastikan compiler C seperti GCC/MinGW sudah tersedia.
 
@@ -66,63 +64,58 @@ Keterangan:
 
 ## Simbol Peta
 
-| Simbol | Arti |
-| --- | --- |
-| `W` | Warga yang harus bergerak menuju titik aman |
-| `S` | Titik aman atau tujuan warga |
-| `F` | Sumber api |
-| `0` | Sel kosong yang dapat dilewati |
-| `X` | Sel terbakar, biasanya muncul saat simulasi berjalan |
+| Simbol | Arti                                        |
+| ------ | ------------------------------------------- |
+| `W`    | Warga yang harus bergerak menuju titik aman |
+| `S`    | Titik aman atau tujuan warga                |
+| `F`    | Sumber api                                  |
+| `0`    | Sel kosong yang dapat dilewati              |
+| `X`    | Sel terbakar, muncul saat simulasi berjalan |
 
 BFS hanya menganggap `0`, `W`, dan `S` sebagai sel yang bisa dilewati. Simbol lain, termasuk `F` dan `X`, tidak dianggap sebagai jalur valid.
 
 ## Contoh Input
 
 ```text
-3
-3
-W 0 S
-0 0 0
-F 0 0
+9
+9
+W 0 0 0 X 0 0 0 S
+0 0 0 0 X X 0 0 0
+0 0 0 0 X 0 0 0 0
+0 0 0 0 0 0 X 0 0
+0 0 W 0 0 X X 0 0
+0 0 0 0 0 0 0 X X
+0 0 0 0 0 0 0 0 W
+F 0 0 0 0 0 0 0 0
+0 0 0 0 F 0 X 0 0
 ```
 
 Penjelasan contoh:
 
-- Peta berukuran `3 x 3`.
-- Warga berada di kiri atas, yaitu koordinat `(0,0)`.
-- Titik aman berada di kanan atas, yaitu koordinat `(0,2)`.
-- Api berada di kiri bawah, yaitu koordinat `(2,0)`.
-- BFS akan mencari jalur terpendek dari `W` ke `S`, yaitu lewat baris atas.
-
-## Contoh Cara Input Saat Program Berjalan
-
-Setelah menjalankan `.\program.exe`, masukkan:
-
-```text
-3
-3
-W 0 S
-0 0 0
-F 0 0
-```
-
-Program akan menampilkan perubahan peta setiap 1 detik. Contoh akhir output:
-
-```text
-jumlah warga yang selamat = 1
-jumlah warga yang terbakar = 0
-```
+- Peta berukuran `9 x 9`.
+- Warga berada pada koordinat `(0,0)`, `(4,2)`, dan `(6,8)`.
+- Titik aman berada di kanan atas, yaitu koordinat `(0,8)`.
+- Api berada pada koordinat `(7,0)` dan `(8,4)`.
+- Simbol `X` berperan sebagai penghalang atau area terbakar yang tidak dapat dilewati BFS.
+- BFS akan mencari jalur terpendek dari setiap `W` menuju `S` dengan menghindari `X` dan `F`.
+- Pada implementasi `program.c` saat ini, posisi api yang dipakai untuk penyebaran adalah posisi `F` terakhir yang terbaca saat scan peta, yaitu `(8,4)`.
 
 ## Menjalankan dengan File Input
 
-Kamu juga bisa menyimpan input ke file, misalnya `input.txt`:
+Program juga bisa menyimpan input ke file, misalnya `input.txt`:
 
 ```text
-3
-3
-W 0 S
-0 0 0
-F 0 0
+9
+9
+W 0 0 0 X 0 0 0 S
+0 0 0 0 X X 0 0 0
+0 0 0 0 X 0 0 0 0
+0 0 0 0 0 0 X 0 0
+0 0 W 0 0 X X 0 0
+0 0 0 0 0 0 0 X X
+0 0 0 0 0 0 0 0 W
+F 0 0 0 0 0 0 0 0
+0 0 0 0 F 0 X 0 0
 ```
 
 Lalu jalankan:
